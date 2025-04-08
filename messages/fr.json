@@ -17,5 +17,13 @@
       "InvalidCredentials": "Identifiants invalides",
       "WeakPassword": "Le mot de passe doit contenir au moins 6 caractères"
     }
+  },
+  "Admin": {
+    "Layout": {
+      "CloseSidebar": "Fermer la barre latérale",
+      "OpenSidebar": "Ouvrir la barre latérale",
+      "MyAccount": "Mon compte",
+      "Logout": "Déconnexion"
+    }
   }
 }
