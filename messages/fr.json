@@ -1,0 +1,21 @@
+{
+  "Auth": {
+    "SignIn": "Se connecter à votre compte",
+    "SignUp": "Créer un compte",
+    "Email": "Adresse e-mail",
+    "Password": "Mot de passe",
+    "ConfirmPassword": "Confirmer le mot de passe",
+    "Login": "Connexion",
+    "Register": "Inscription",
+    "DontHaveAccount": "Vous n'avez pas de compte ?",
+    "AlreadyHaveAccount": "Vous avez déjà un compte ?",
+    "SignInNow": "Connectez-vous maintenant",
+    "SignUpNow": "Inscrivez-vous maintenant",
+    "Errors": {
+      "PasswordMismatch": "Les mots de passe ne correspondent pas",
+      "UserAlreadyExists": "Un utilisateur avec cet e-mail existe déjà",
+      "InvalidCredentials": "Identifiants invalides",
+      "WeakPassword": "Le mot de passe doit contenir au moins 6 caractères"
+    }
+  }
+}

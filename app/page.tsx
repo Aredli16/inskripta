@@ -1,3 +1,2 @@
-export default function Page() {
-  return <>Hello World</>;
-}
+const Page = () => <>Hello World</>;
+export default Page;

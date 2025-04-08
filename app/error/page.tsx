@@ -1,5 +1,4 @@
 "use client";
 
-export default function ErrorPage() {
-  return <p>Sorry, something went wrong</p>;
-}
+const ErrorPage = () => <p>Sorry, something went wrong</p>;
+export default ErrorPage;
