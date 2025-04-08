@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { AuthState, signIn, signUp } from "@/app/auth/actions";
+import { AuthState, signIn, signUp } from "@/app/(main)/auth/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { PulseLoader } from "react-spinners";
