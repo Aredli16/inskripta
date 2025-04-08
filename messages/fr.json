@@ -18,12 +18,30 @@
       "WeakPassword": "Le mot de passe doit contenir au moins 6 caractères"
     }
   },
+  "Logout": "Déconnexion",
+  "Header": {
+    "Navigation": {
+      "MyRegistrations": "Mes inscriptions"
+    }
+  },
+  "Registration": {
+    "Create": {
+      "Title": "Créer une inscription",
+      "NewStudent": "Inscription d'un nouvel étudiant",
+      "ExistingStudent": "Réinscription d'un étudiant existant",
+      "Steps": {
+        "01": {
+          "Title": "Informations sur l'étudiant",
+          "Description": "Veuillez fournir les informations de l'étudiant."
+        }
+      }
+    }
+  },
   "Admin": {
     "Layout": {
       "CloseSidebar": "Fermer la barre latérale",
       "OpenSidebar": "Ouvrir la barre latérale",
-      "MyAccount": "Mon compte",
-      "Logout": "Déconnexion"
+      "MyAccount": "Mon compte"
     }
   }
 }

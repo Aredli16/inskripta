@@ -53,7 +53,7 @@ const secondaryNavigation: {
 const Page = ({ children }: { children: ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
-  const t = useTranslations("Admin.Layout");
+  const t = useTranslations();
 
   return (
     <>
@@ -81,7 +81,9 @@ const Page = ({ children }: { children: ReactNode }) => {
                     className="relative ml-1 flex size-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
                   >
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">{t("CloseSidebar")}</span>
+                    <span className="sr-only">
+                      {t("Admin.Layout.CloseSidebar")}
+                    </span>
                     <XMarkIcon
                       aria-hidden="true"
                       className="size-6 text-white"
@@ -222,7 +224,7 @@ const Page = ({ children }: { children: ReactNode }) => {
               onClick={() => setSidebarOpen(true)}
               className="border-r border-gray-200 px-4 text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset lg:hidden"
             >
-              <span className="sr-only">{t("OpenSidebar")}</span>
+              <span className="sr-only">{t("Admin.Layout.OpenSidebar")}</span>
               <Bars3CenterLeftIcon aria-hidden="true" className="size-6" />
             </button>
             {/* Search bar */}
@@ -241,7 +243,7 @@ const Page = ({ children }: { children: ReactNode }) => {
                         height="32"
                       />
                       <span className="ml-3 hidden text-sm font-medium text-gray-700 lg:block">
-                        {t("MyAccount")}
+                        {t("Admin.Layout.MyAccount")}
                       </span>
                       <ChevronDownIcon
                         aria-hidden="true"
