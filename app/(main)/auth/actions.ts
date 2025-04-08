@@ -41,7 +41,7 @@ export async function signIn(
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect((formData.get("redirectTo") as string) ?? "/");
 }
 
 export async function signUp(
@@ -89,5 +89,5 @@ export async function signUp(
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect((formData.get("redirectTo") as string) ?? "/");
 }

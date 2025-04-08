@@ -7,7 +7,7 @@ import Image from "next/image";
 import { PulseLoader } from "react-spinners";
 import { useTranslations } from "next-intl";
 
-const LoginForm = () => {
+const LoginForm = ({ redirectTo }: { redirectTo?: string }) => {
   const [mode, setMode] = useState<"login" | "register">("login");
   const toggleMode = () => setMode(mode === "login" ? "register" : "login");
   const [state, action, pending] = useActionState(
@@ -120,6 +120,10 @@ const LoginForm = () => {
               </div>
             )}
           </div>
+
+          {redirectTo && (
+            <input type="hidden" name="redirectTo" value={redirectTo} />
+          )}
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
