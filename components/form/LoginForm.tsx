@@ -1,19 +1,21 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { AuthState, login, register } from "@/app/auth/actions";
+import { AuthState, signIn, signUp } from "@/app/auth/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { PulseLoader } from "react-spinners";
+import { useTranslations } from "next-intl";
 
-export default function LoginForm() {
+const LoginForm = () => {
   const [mode, setMode] = useState<"login" | "register">("login");
   const toggleMode = () => setMode(mode === "login" ? "register" : "login");
   const [state, action, pending] = useActionState(
     (state: AuthState, payload: FormData) =>
-      mode === "login" ? login(state, payload) : register(state, payload),
+      mode === "login" ? signIn(state, payload) : signUp(state, payload),
     {},
   );
+  const t = useTranslations("Auth");
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -26,9 +28,7 @@ export default function LoginForm() {
           height="50"
         />
         <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
-          {mode === "login"
-            ? "Sign in to your account"
-            : "Create a new account"}
+          {mode === "login" ? t("SignIn") : t("SignUp")}
         </h2>
       </div>
 
@@ -39,7 +39,7 @@ export default function LoginForm() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-900"
             >
-              Email address
+              {t("Email")}
             </label>
             <div className="mt-2">
               <input
@@ -58,7 +58,7 @@ export default function LoginForm() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-900"
             >
-              Password
+              {t("Password")}
             </label>
             <div className="mt-2">
               <input
@@ -85,7 +85,7 @@ export default function LoginForm() {
                   htmlFor="confirmPassword"
                   className="block text-sm font-medium text-gray-900"
                 >
-                  Confirm password
+                  {t("ConfirmPassword")}
                 </label>
                 <div className="mt-2">
                   <input
@@ -108,9 +108,9 @@ export default function LoginForm() {
               {pending ? (
                 <PulseLoader color="#312c85" />
               ) : mode === "login" ? (
-                "Sign in"
+                t("Login")
               ) : (
-                "Register"
+                t("Register")
               )}
             </button>
 
@@ -123,17 +123,17 @@ export default function LoginForm() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          {mode === "login"
-            ? "Don't have an account?"
-            : "Already have an account?"}{" "}
+          {mode === "login" ? t("DontHaveAccount") : t("AlreadyHaveAccount")}{" "}
           <button
             onClick={toggleMode}
             className="font-semibold text-indigo-600 hover:text-indigo-500"
           >
-            {mode === "login" ? "Register now" : "Sign in"}
+            {mode === "login" ? t("SignUpNow") : t("SignInNow")}
           </button>
         </p>
       </div>
     </div>
   );
-}
+};
+
+export default LoginForm;
