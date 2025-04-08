@@ -1,7 +1,5 @@
-import AdminLayout from "@/components/layout/AdminLayout";
-
 const Page = () => {
-  return <AdminLayout>Hello World !</AdminLayout>;
+  return <>Hello World !</>;
 };
 
 export default Page;
