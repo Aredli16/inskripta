@@ -34,7 +34,62 @@ export type Database = {
   };
   public: {
     Tables: {
-      [_ in never]: never;
+      organization_administration: {
+        Row: {
+          id: string;
+          organization_id: string | null;
+          user_id: string | null;
+        };
+        Insert: {
+          id?: string;
+          organization_id?: string | null;
+          user_id?: string | null;
+        };
+        Update: {
+          id?: string;
+          organization_id?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "organization_administration_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      organizations: {
+        Row: {
+          id: string;
+          name: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      user_roles: {
+        Row: {
+          id: string;
+          role: Database["public"]["Enums"]["user_role"] | null;
+        };
+        Insert: {
+          id: string;
+          role?: Database["public"]["Enums"]["user_role"] | null;
+        };
+        Update: {
+          id?: string;
+          role?: Database["public"]["Enums"]["user_role"] | null;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -43,7 +98,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      [_ in never]: never;
+      user_role: "super_admin";
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -161,6 +216,8 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["super_admin"],
+    },
   },
 } as const;
