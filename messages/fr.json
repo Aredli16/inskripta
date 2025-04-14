@@ -1,5 +1,27 @@
 {
-  "Home": {
-    "Title": "Bienvenue sur notre site"
+  "Auth": {
+    "Email": "Adresse e-mail",
+    "Password": "Mot de passe",
+    "Login": {
+      "Title": "Connectez-vous à votre compte",
+      "Remember": "Se souvenir de moi",
+      "ForgotPassword": "Mot de passe oublié ?",
+      "Login": "Connexion",
+      "NoAccount": "Pas de compte ?",
+      "Register": "Inscrivez-vous",
+      "Error": {
+        "InvalidCredentials": "Identifiants invalides"
+      }
+    },
+    "Register": {
+      "Title": "S'inscrire",
+      "ConfirmPassword": "Confirmer le mot de passe",
+      "Login": "« Retour à la connexion",
+      "Error": {
+        "PasswordMismatch": "Les mots de passe ne correspondent pas",
+        "UserAlreadyExists": "L'adresse email existe déjà",
+        "WeakPassword": "Le mot de passe est trop faible"
+      }
+    }
   }
 }
