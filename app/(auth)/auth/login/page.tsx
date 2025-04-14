@@ -102,7 +102,7 @@ const Page = () => {
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t("Login.NoAccount")}{" "}
             <Link
-              href="/auth/register"
+              href="/app/(auth)/auth/register"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
               {t("Login.Register")}

@@ -23,5 +23,14 @@
         "WeakPassword": "Le mot de passe est trop faible"
       }
     }
+  },
+  "Admin": {
+    "Layout": {
+      "OpenSidebar": "Ouvrir la barre latérale",
+      "CloseSidebar": "Fermer la barre latérale",
+      "OpenUserMenu": "Ouvrir le menu utilisateur",
+      "MyProfile": "Mon profil",
+      "Logout": "Déconnexion"
+    }
   }
 }

@@ -73,7 +73,7 @@ const Page = () => {
           </div>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            <Link href="/auth/login">{t("Register.Login")}</Link>
+            <Link href="/app/(auth)/auth/login">{t("Register.Login")}</Link>
           </p>
         </div>
       </div>
