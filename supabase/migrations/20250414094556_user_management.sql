@@ -14,10 +14,9 @@ create table organizations
 
 create table organization_administration
 (
-    id              uuid primary key default gen_random_uuid(),
     organization_id uuid references organizations (id) on delete cascade,
     user_id         uuid references auth.users (id) on delete cascade,
-    constraint organization_administration_organization_id_user_id_unique unique (organization_id, user_id)
+    primary key (organization_id, user_id)
 );
 
 create function public.handle_new_user()
