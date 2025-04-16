@@ -36,19 +36,16 @@ export type Database = {
     Tables: {
       organization_administration: {
         Row: {
-          id: string;
-          organization_id: string | null;
-          user_id: string | null;
+          organization_id: string;
+          user_id: string;
         };
         Insert: {
-          id?: string;
-          organization_id?: string | null;
-          user_id?: string | null;
+          organization_id: string;
+          user_id: string;
         };
         Update: {
-          id?: string;
-          organization_id?: string | null;
-          user_id?: string | null;
+          organization_id?: string;
+          user_id?: string;
         };
         Relationships: [
           {
@@ -75,18 +72,15 @@ export type Database = {
         };
         Relationships: [];
       };
-      user_roles: {
+      super_admins: {
         Row: {
           id: string;
-          role: Database["public"]["Enums"]["user_role"] | null;
         };
         Insert: {
           id: string;
-          role?: Database["public"]["Enums"]["user_role"] | null;
         };
         Update: {
           id?: string;
-          role?: Database["public"]["Enums"]["user_role"] | null;
         };
         Relationships: [];
       };
@@ -95,7 +89,13 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_user_by_email: {
+        Args: { search_email: string };
+        Returns: {
+          id: string;
+          email: string;
+        }[];
+      };
     };
     Enums: {
       user_role: "super_admin";

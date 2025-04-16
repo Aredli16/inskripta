@@ -16,18 +16,29 @@ import Link from "next/link";
 import clsx from "clsx";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { createClient } from "@/utils/supabase/client";
-import { ComponentProps, JSX, ReactNode, useState } from "react";
+import {
+  ForwardRefExoticComponent,
+  ReactNode,
+  RefAttributes,
+  SVGProps,
+  useState,
+} from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 type NavigationItem = {
   name: string;
   href: string;
-  icon: (props: ComponentProps<"svg">) => JSX.Element;
+  icon: ForwardRefExoticComponent<
+    Omit<SVGProps<SVGSVGElement>, "ref"> & {
+      title?: string | undefined;
+      titleId?: string | undefined;
+    } & RefAttributes<SVGSVGElement>
+  >;
   current: boolean;
 };
 
-const AdminLayout = ({
+const BaseAdminLayout = ({
   children,
   navigation,
   secondaryNavigation,
@@ -236,11 +247,11 @@ const AdminLayout = ({
           </div>
         </div>
         <main className="flex-1 pb-8">
-          <div className="mt-8">{children}</div>
+          <div className="mx-auto mt-8 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
     </div>
   );
 };
 
-export default AdminLayout;
+export default BaseAdminLayout;
