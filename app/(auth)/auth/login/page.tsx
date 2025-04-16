@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useActionState } from "react";
 import ValidationInput from "@/components/form/ValidationInput";
 import SubmitButton from "@/components/form/SubmitButton";
-import { login } from "@/actions/auth/login/actions";
 import { useTranslations } from "next-intl";
+import { login } from "@/actions/auth-actions";
 
 const Page = () => {
   const t = useTranslations("Auth");

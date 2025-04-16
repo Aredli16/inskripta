@@ -32,5 +32,57 @@
       "MyProfile": "Mon profil",
       "Logout": "Déconnexion"
     }
+  },
+  "SuperAdmin": {
+    "Layout": {
+      "Navigation": {
+        "Organizations": "Organisations"
+      }
+    },
+    "Organizations": {
+      "Title": "Organisations",
+      "Description": "Gérez les organisations du système",
+      "AddOrganization": "Ajouter une organisation",
+      "DataTable": {
+        "Header": {
+          "ID": "ID",
+          "Name": "Nom",
+          "Actions": "Actions"
+        },
+        "Actions": {
+          "View": "Voir"
+        }
+      },
+      "Add": {
+        "Title": "Ajouter une organisation",
+        "Description": "Créez une nouvelle organisation"
+      },
+      "Delete": {
+        "Title": "Supprimer l'organisation",
+        "Description": "Êtes-vous sûr de vouloir supprimer cette organisation ? Cette action est irréversible.",
+        "Submit": "Supprimer",
+        "Cancel": "Annuler"
+      },
+      "View": {
+        "Title": "Détails de l'organisation",
+        "Description": "Voir les détails de l'organisation",
+        "Admin": {
+          "Title": "Administration de l'organisation",
+          "Description": "Gérez les utilisateurs et les paramètres de l'organisation",
+          "Add": {
+            "Title": "Ajouter un administrateur",
+            "Placeholder": "Chercher un utilisateur",
+            "Submit": "Ajouter",
+            "Cancel": "Annuler"
+          },
+          "Remove": "Supprimer l'administrateur"
+        }
+      },
+      "Form": {
+        "Name": "Nom de l'organisation",
+        "Submit": "Sauvegarder",
+        "Cancel": "Annuler"
+      }
+    }
   }
 }
