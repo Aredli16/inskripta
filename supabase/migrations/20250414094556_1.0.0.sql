@@ -197,15 +197,70 @@ create policy "Only orga admins can delete school_years"
                   where organization_id = school_years.organization_id
                     and user_id = auth.uid()));
 
+create table students
+(
+    id              uuid primary key                                  default gen_random_uuid(),
+    last_name       varchar(255),
+    first_name      varchar(255),
+    user_id         uuid references auth.users (id) on delete cascade default auth.uid(),
+    organization_id uuid references organizations (id) on delete cascade,
+    created_at      timestamp                                         default now(),
+    updated_at      timestamp                                         default now()
+);
+
+alter table students
+    enable row level security;
+
+create policy "All can see owned student and orga admins can see all"
+    on students
+    for select
+    using (
+    user_id = auth.uid()
+        or exists (select 1
+                   from organization_administration
+                   where organization_id = students.organization_id
+                     and user_id = auth.uid())
+    );
+
+create policy "All can insert self students and orga admins can insert"
+    on students
+    for insert
+    with check (user_id = auth.uid()
+    or exists(select 1
+              from organization_administration
+              where organization_id = students.organization_id
+                and user_id = auth.uid()));
+
+create policy "All can update self students and orga admins can update"
+    on students
+    for update
+    using (user_id = auth.uid()
+    or exists(select 1
+              from organization_administration
+              where organization_id = students.organization_id
+                and user_id = auth.uid()))
+    with check (user_id = auth.uid()
+    or exists(select 1
+              from organization_administration
+              where organization_id = students.organization_id
+                and user_id = auth.uid()));
+
+create policy "All can delete self students and orga admins can delete"
+    on students
+    for delete
+    using (user_id = auth.uid()
+    or exists(select 1
+              from organization_administration
+              where organization_id = students.organization_id
+                and user_id = auth.uid()));
+
 create table registrations
 (
-    id             uuid primary key                                                                                  default gen_random_uuid(),
-    last_name      varchar(255),
-    first_name     varchar(255),
-    user_id        uuid                                                references auth.users (id) on delete set null default auth.uid(),
+    id             uuid primary key default gen_random_uuid(),
+    student_id     uuid references students (id) on delete cascade     not null,
     school_year_id uuid references school_years (id) on delete cascade not null,
-    created_at     timestamp                                                                                         default now(),
-    updated_at     timestamp                                                                                         default now()
+    created_at     timestamp        default now(),
+    updated_at     timestamp        default now()
 );
 
 alter table registrations
@@ -215,52 +270,61 @@ create policy "All can see owned registrations and orga admins can see all"
     on registrations
     for select
     using (
-    user_id = auth.uid()
-        or exists(select 1
-                  from organization_administration
-                  where organization_id = (select organization_id
-                                           from school_years
-                                           where id = registrations.school_year_id)
-                    and user_id = auth.uid())
+    student_id = (select id
+                  from students
+                  where user_id = auth.uid())
+        or exists (select 1
+                   from organization_administration
+                   where organization_id = (select organization_id
+                                            from students
+                                            where id = registrations.student_id)
+                     and user_id = auth.uid())
     );
 
 create policy "All can insert self registrations and orga admins can insert"
     on registrations
     for insert
-    with check (user_id = auth.uid()
+    with check (student_id = (select id
+                              from students
+                              where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
-                                       from school_years
-                                       where id = registrations.school_year_id)
+                                       from students
+                                       where id = registrations.student_id)
                 and user_id = auth.uid()));
-
 
 create policy "All can update self registrations and orga admins can update"
     on registrations
     for update
-    using (user_id = auth.uid()
+    using (student_id = (select id
+                         from students
+                         where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
-                                       from school_years
-                                       where id = registrations.school_year_id)
+                                       from students
+                                       where id = registrations.student_id)
                 and user_id = auth.uid()))
-    with check (user_id = auth.uid()
+    with check (student_id = (select id
+                              from students
+                              where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
-                                       from school_years
-                                       where id = registrations.school_year_id)
+                                       from students
+                                       where id = registrations.student_id)
                 and user_id = auth.uid()));
 
 create policy "All can delete self registrations and orga admins can delete"
     on registrations
     for delete
-    using (user_id = auth.uid()
+    using (student_id = (select id
+                         from students
+                         where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
-                                       from school_years
-                                       where id = registrations.school_year_id)
+                                       from students
+                                       where id = registrations.student_id)
                 and user_id = auth.uid()));
