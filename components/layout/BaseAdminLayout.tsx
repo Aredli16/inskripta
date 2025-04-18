@@ -52,7 +52,7 @@ const BaseAdminLayout = ({
   const router = useRouter();
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full bg-gray-100">
       <Dialog
         open={sidebarOpen}
         onClose={setSidebarOpen}

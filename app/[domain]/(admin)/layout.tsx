@@ -1,7 +1,4 @@
-import "../../globals.css";
 import { ReactNode } from "react";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale } from "next-intl/server";
 import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
 import BaseAdminLayout from "@/components/layout/BaseAdminLayout";
@@ -34,18 +31,10 @@ const Layout = async ({
     notFound();
   }
 
-  const locale = await getLocale();
-
   return (
-    <html lang={locale} className="h-full bg-gray-100">
-      <body className="h-full">
-        <NextIntlClientProvider>
-          <BaseAdminLayout navigation={[]} secondaryNavigation={[]}>
-            {children}
-          </BaseAdminLayout>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <BaseAdminLayout navigation={[]} secondaryNavigation={[]}>
+      {children}
+    </BaseAdminLayout>
   );
 };
 
