@@ -1,4 +1,9 @@
 {
+  "404": {
+    "Title": "Page non trouvée",
+    "Description": "Désolé, la page que vous recherchez n'existe pas.",
+    "BackToHome": "Retour à l'accueil"
+  },
   "Auth": {
     "Email": "Adresse e-mail",
     "Password": "Mot de passe",
