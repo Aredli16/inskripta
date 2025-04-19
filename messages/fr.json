@@ -46,6 +46,11 @@
           "Title": "Créer une inscription",
           "NewStudent": "Créer une inscription pour un nouvel étudiant"
         },
+        "List": {
+          "Title": "Mes inscriptions",
+          "CreatedAt": "Créé le",
+          "ID": "ID"
+        },
         "Layout": {
           "Steps": {
             "01": {
