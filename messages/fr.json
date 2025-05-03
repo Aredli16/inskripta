@@ -29,6 +29,42 @@
       }
     }
   },
+  "Domain": {
+    "Home": {
+      "Layout": {
+        "Navigation": {
+          "Title": "Ouvrir le menu de navigation",
+          "Registrations": "Mes inscriptions",
+          "UserMenu": {
+            "Title": "Ouvrir le menu utilisateur",
+            "Logout": "Déconnexion"
+          }
+        }
+      },
+      "Registration": {
+        "Create": {
+          "Title": "Créer une inscription",
+          "NewStudent": "Créer une inscription pour un nouvel étudiant"
+        },
+        "Layout": {
+          "Steps": {
+            "01": {
+              "Title": "Informations de l'étudiant",
+              "Description": "Remplissez les informations de l'étudiant"
+            }
+          }
+        },
+        "StudentForm": {
+          "Title": "Informations de l'étudiant",
+          "Description": "Remplissez les informations de l'étudiant",
+          "LastName": "Nom de famille",
+          "FirstName": "Prénom",
+          "Cancel": "Annuler",
+          "Next": "Suivant"
+        }
+      }
+    }
+  },
   "Admin": {
     "Layout": {
       "OpenSidebar": "Ouvrir la barre latérale",
