@@ -6,7 +6,7 @@ import { useActionState, useState } from "react";
 import ValidationInput from "@/components/form/ValidationInput";
 import SubmitButton from "@/components/form/SubmitButton";
 import { useTranslations } from "next-intl";
-import { register } from "@/actions/auth-actions";
+import { register } from "@/app/auth/register/register.action";
 
 const Page = () => {
   const t = useTranslations("Auth");

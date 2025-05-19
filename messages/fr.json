@@ -68,6 +68,69 @@
           "Next": "Suivant"
         }
       }
+    },
+    "Admin": {
+      "Navigation": {
+        "Students": "Elèves",
+        "Registrations": "Inscriptions"
+      },
+      "Students": {
+        "Title": "Elèves",
+        "Description": "Liste des élèves",
+        "Add": {
+          "Title": "Ajouter un utilisateur"
+        },
+        "List": {
+          "Header": {
+            "ID": "ID",
+            "LastName": "Nom",
+            "FirstName": "Prénom",
+            "CreatedAt": "Créé le",
+            "Actions": "Actions"
+          },
+          "Actions": {
+            "View": "Voir"
+          }
+        },
+        "View": {
+          "SystemInformation": "Informations système",
+          "SystemInformationDescription": "Informations système de l'élève",
+          "ID": "ID",
+          "CreatedAt": "Créé le",
+          "MinimumInformation": "Informations minimales",
+          "MinimumInformationDescription": "Les informations minimales de l'élève",
+          "LastName": "Nom de famille",
+          "FirstName": "Prénom"
+        }
+      },
+      "Registrations": {
+        "Title": "Inscriptions",
+        "Description": "Liste des inscriptions",
+        "Add": {
+          "Title": "Ajouter une inscription"
+        },
+        "List": {
+          "Header": {
+            "ID": "ID",
+            "Student": "Elève",
+            "CreatedAt": "Créé le",
+            "Actions": "Actions"
+          },
+          "Actions": {
+            "View": "Voir"
+          }
+        },
+        "View": {
+          "SystemInformation": "Informations système",
+          "SystemInformationDescription": "Informations système de l'inscription",
+          "ID": "ID",
+          "CreatedAt": "Créé le",
+          "StudentInformation": "Informations de l'élève",
+          "StudentInformationDescription": "Informations de l'élève pour l'inscription",
+          "LastName": "Nom de famille",
+          "FirstName": "Prénom"
+        }
+      }
     }
   },
   "Admin": {

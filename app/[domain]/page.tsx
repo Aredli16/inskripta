@@ -16,12 +16,14 @@ import { redirect } from "next/navigation";
 import { CheckCircleIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { getTranslations } from "next-intl/server";
 
-const Page = async () => {
+const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
+  const { domain } = await params;
   const t = await getTranslations("Domain.Home");
   const supabase = await createClient();
   const { data: registrations } = await supabase
     .from("registrations")
-    .select("*, students(*)");
+    .select("*, students!inner(*, organizations!inner(*))")
+    .eq("students.organizations.name", domain);
 
   return (
     <>
@@ -159,14 +161,14 @@ const Page = async () => {
           <h2 className="sr-only">{t("Registration.List.Title")}</h2>
           <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
             <div className="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
-              {registrations.map((registration) => (
+              {registrations?.map((registration) => (
                 <div
                   key={registration.id}
                   className="border-t border-b border-gray-200 bg-white shadow-xs sm:rounded-lg sm:border"
                 >
                   <h3 className="sr-only">
                     {t("Registration.List.CreatedAt")}{" "}
-                    <time dateTime={registration.created_at}>
+                    <time dateTime={registration.created_at ?? ""}>
                       {registration.created_at}
                     </time>
                   </h3>
@@ -186,8 +188,10 @@ const Page = async () => {
                           {t("Registration.List.CreatedAt")}
                         </dt>
                         <dd className="mt-1 text-gray-500">
-                          <time dateTime={registration.created_at}>
-                            {new Date(registration.created_at).toLocaleString()}
+                          <time dateTime={registration.created_at ?? ""}>
+                            {new Date(
+                              registration.created_at ?? "",
+                            ).toLocaleString()}
                           </time>
                         </dd>
                       </div>
@@ -215,7 +219,7 @@ const Page = async () => {
                           />
                           <p className="ml-2 text-sm font-medium text-gray-500">
                             Delivered on{" "}
-                            <time dateTime={registration.created_at}>
+                            <time dateTime={registration.created_at ?? ""}>
                               {registration.created_at}
                             </time>
                           </p>

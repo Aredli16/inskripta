@@ -24,7 +24,7 @@ import {
   useState,
 } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 type NavigationItem = {
   name: string;
@@ -35,7 +35,6 @@ type NavigationItem = {
       titleId?: string | undefined;
     } & RefAttributes<SVGSVGElement>
   >;
-  current: boolean;
 };
 
 const BaseAdminLayout = ({
@@ -50,6 +49,7 @@ const BaseAdminLayout = ({
   const t = useTranslations("Admin.Layout");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="min-h-full bg-gray-100">
@@ -93,9 +93,9 @@ const BaseAdminLayout = ({
                   <Link
                     key={item.name}
                     href={item.href}
-                    aria-current={item.current ? "page" : undefined}
+                    aria-current={pathname === item.href ? "page" : undefined}
                     className={clsx(
-                      item.current
+                      pathname === item.href
                         ? "bg-indigo-800 text-white"
                         : "text-indigo-100 hover:bg-indigo-600 hover:text-white",
                       "group flex items-center rounded-md px-2 py-2 text-base font-medium",
@@ -116,7 +116,7 @@ const BaseAdminLayout = ({
                       key={item.name}
                       href={item.href}
                       className={clsx(
-                        item.current
+                        pathname === item.href
                           ? "bg-indigo-800 text-white"
                           : "text-indigo-100 hover:bg-indigo-600 hover:text-white",
                         "group flex items-center rounded-md px-2 py-2 text-base font-medium",
@@ -155,9 +155,9 @@ const BaseAdminLayout = ({
                 <Link
                   key={item.name}
                   href={item.href}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={pathname === item.href ? "page" : undefined}
                   className={clsx(
-                    item.current
+                    pathname === item.href
                       ? "bg-indigo-800 text-white"
                       : "text-indigo-100 hover:bg-indigo-600 hover:text-white",
                     "group flex items-center rounded-md px-2 py-2 text-sm/6 font-medium",
@@ -178,7 +178,7 @@ const BaseAdminLayout = ({
                     key={item.name}
                     href={item.href}
                     className={clsx(
-                      item.current
+                      pathname === item.href
                         ? "bg-indigo-800 text-white"
                         : "text-indigo-100 hover:bg-indigo-600 hover:text-white",
                       "group flex items-center rounded-md px-2 py-2 text-sm/6 font-medium",
