@@ -72,6 +72,121 @@ export type Database = {
         };
         Relationships: [];
       };
+      registrations: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          school_year_id: string;
+          student_id: string;
+          updated_at: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          school_year_id: string;
+          student_id: string;
+          updated_at?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          school_year_id?: string;
+          student_id?: string;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "registrations_school_year_id_fkey";
+            columns: ["school_year_id"];
+            isOneToOne: false;
+            referencedRelation: "school_years";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "registrations_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      school_years: {
+        Row: {
+          created_at: string | null;
+          current: boolean;
+          end_date: string;
+          id: string;
+          organization_id: string;
+          start_date: string;
+          updated_at: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          current?: boolean;
+          end_date: string;
+          id?: string;
+          organization_id: string;
+          start_date: string;
+          updated_at?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          current?: boolean;
+          end_date?: string;
+          id?: string;
+          organization_id?: string;
+          start_date?: string;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "school_years_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      students: {
+        Row: {
+          created_at: string | null;
+          first_name: string | null;
+          id: string;
+          last_name: string | null;
+          organization_id: string | null;
+          updated_at: string | null;
+          user_id: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          first_name?: string | null;
+          id?: string;
+          last_name?: string | null;
+          organization_id?: string | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          first_name?: string | null;
+          id?: string;
+          last_name?: string | null;
+          organization_id?: string | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "students_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       super_admins: {
         Row: {
           id: string;

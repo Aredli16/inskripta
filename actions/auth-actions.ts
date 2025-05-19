@@ -35,7 +35,7 @@ export const login = async (
     }
   }
 
-  revalidatePath("/", "layout");
+  revalidatePath("/");
   redirect("/");
 };
 
@@ -88,6 +88,6 @@ export const register = async (
     }
   }
 
-  revalidatePath("/", "layout");
+  revalidatePath("/");
   redirect("/");
 };
