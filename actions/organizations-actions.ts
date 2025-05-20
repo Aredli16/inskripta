@@ -3,6 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { slugify } from "@/utils/slugify";
 
 type OrganizationState = {
   success?: boolean;
@@ -13,14 +14,7 @@ type OrganizationState = {
 
 export const saveOrganization = async (formData: FormData) => {
   const organizationId = formData.get("organizationId") as string;
-  const rawName = (formData.get("name") as string).toLowerCase();
-  const name = rawName
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9- ]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
+  const name = slugify(formData.get("name") as string);
 
   if (!/^[a-z0-9-]+$/.test(name)) {
     throw Error("Invalid organization name");

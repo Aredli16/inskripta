@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getTranslations } from "next-intl/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import SubmitButton from "@/components/form/SubmitButton";
 
 const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
   const { domain } = await params;
@@ -59,11 +62,12 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
             },
           ]);
 
-        console.log(registrationError);
-
         if (registrationError) {
           throw registrationError;
         }
+
+        revalidatePath("/");
+        redirect("/");
       }}
     >
       <div className="space-y-12">
@@ -118,12 +122,9 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
         <Link href="/" className="text-sm/6 font-semibold text-gray-900">
           {t("Cancel")}
         </Link>
-        <button
-          type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
+        <SubmitButton className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           {t("Next")}
-        </button>
+        </SubmitButton>
       </div>
     </form>
   );
