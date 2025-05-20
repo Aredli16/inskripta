@@ -9,7 +9,10 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "supabase:types": "supabase gen types typescript --local > ./types/database.types.ts"
+    "supabase:start": "supabase start > supabase.log && SUPABASE_URL=$(grep -m1 'API URL:' supabase.log | awk '{print $NF}') && ANON_KEY=$(grep -m1 'anon key:' supabase.log | awk '{print $NF}') && SERVICE_ROLE_KEY=$(grep -m1 'service_role key:' supabase.log | awk '{print $NF}') && printf 'NEXT_PUBLIC_SUPABASE_URL=%s\\nNEXT_PUBLIC_SUPABASE_ANON_KEY=%s\\nNEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY=%s\\n' \"$SUPABASE_URL\" \"$ANON_KEY\" \"$SERVICE_ROLE_KEY\" > .env.local && echo '.env.local generated:' && cat .env.local && rm supabase.log",
+    "supabase:types": "supabase gen types typescript --local > ./types/database.types.ts",
+    "cypress:open": "cypress open",
+    "test": "start-server-and-test start http://localhost:3000 \"cypress run\""
   },
   "dependencies": {
     "@headlessui/react": "^2.2.1",
@@ -30,12 +33,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cypress": "^14.3.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "eslint-config-prettier": "10.1.2",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "prettier": "3.5.3",
+    "start-server-and-test": "^2.0.12",
     "supabase": "^2.20.12",
     "tailwindcss": "^4",
     "typescript": "^5"

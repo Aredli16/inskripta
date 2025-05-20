@@ -271,9 +271,9 @@ create policy "All can see owned registrations and orga admins can see all"
     on registrations
     for select
     using (
-    student_id = (select id
-                  from students
-                  where user_id = auth.uid())
+    student_id in (select id
+                   from students
+                   where user_id = auth.uid())
         or exists (select 1
                    from organization_administration
                    where organization_id = (select organization_id
@@ -286,8 +286,8 @@ create policy "All can insert self registrations and orga admins can insert"
     on registrations
     for insert
     with check (student_id in (select id
-                              from students
-                              where user_id = auth.uid())
+                               from students
+                               where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
@@ -298,18 +298,18 @@ create policy "All can insert self registrations and orga admins can insert"
 create policy "All can update self registrations and orga admins can update"
     on registrations
     for update
-    using (student_id = (select id
-                         from students
-                         where user_id = auth.uid())
+    using (student_id in (select id
+                          from students
+                          where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
                                        from students
                                        where id = registrations.student_id)
                 and user_id = auth.uid()))
-    with check (student_id = (select id
-                              from students
-                              where user_id = auth.uid())
+    with check (student_id in (select id
+                               from students
+                               where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
@@ -320,9 +320,9 @@ create policy "All can update self registrations and orga admins can update"
 create policy "All can delete self registrations and orga admins can delete"
     on registrations
     for delete
-    using (student_id = (select id
-                         from students
-                         where user_id = auth.uid())
+    using (student_id in (select id
+                          from students
+                          where user_id = auth.uid())
     or exists(select 1
               from organization_administration
               where organization_id = (select organization_id
