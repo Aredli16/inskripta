@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
-import BaseAdminLayout from "@/components/layout/BaseAdminLayout";
+import DomainAdminLayout from "@/components/layout/DomainAdminLayout";
 
 const Layout = async ({
   children,
@@ -31,11 +31,7 @@ const Layout = async ({
     notFound();
   }
 
-  return (
-    <BaseAdminLayout navigation={[]} secondaryNavigation={[]}>
-      {children}
-    </BaseAdminLayout>
-  );
+  return <DomainAdminLayout>{children}</DomainAdminLayout>;
 };
 
 export default Layout;

@@ -12,12 +12,24 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
         "use server";
 
         const supabase = await createClient();
+
+        const { data: organization, error: organizationError } = await supabase
+          .from("organizations")
+          .select()
+          .eq("name", domain)
+          .single();
+
+        if (organizationError) {
+          throw organizationError;
+        }
+
         const { data: student, error: studentError } = await supabase
           .from("students")
           .insert([
             {
               first_name: formData.get("first-name") as string,
               last_name: formData.get("last-name") as string,
+              organization_id: organization.id,
             },
           ])
           .select()
@@ -29,9 +41,9 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
 
         const { data: schoolYear, error: schoolYearError } = await supabase
           .from("school_years")
-          .select("*, organizations(*)")
+          .select("*")
           .eq("current", true)
-          .eq("organizations.name", domain)
+          .eq("organization_id", organization.id)
           .single();
 
         if (schoolYearError) {
@@ -46,6 +58,8 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
               school_year_id: schoolYear.id,
             },
           ]);
+
+        console.log(registrationError);
 
         if (registrationError) {
           throw registrationError;

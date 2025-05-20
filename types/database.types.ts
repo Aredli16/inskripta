@@ -155,7 +155,7 @@ export type Database = {
           first_name: string | null;
           id: string;
           last_name: string | null;
-          organization_id: string | null;
+          organization_id: string;
           updated_at: string | null;
           user_id: string | null;
         };
@@ -164,7 +164,7 @@ export type Database = {
           first_name?: string | null;
           id?: string;
           last_name?: string | null;
-          organization_id?: string | null;
+          organization_id: string;
           updated_at?: string | null;
           user_id?: string | null;
         };
@@ -173,7 +173,7 @@ export type Database = {
           first_name?: string | null;
           id?: string;
           last_name?: string | null;
-          organization_id?: string | null;
+          organization_id?: string;
           updated_at?: string | null;
           user_id?: string | null;
         };

@@ -14,7 +14,6 @@ const SuperAdminLayout = ({ children }: { children: ReactNode }) => {
           name: t("Organizations"),
           href: "/admin",
           icon: BuildingOffice2Icon,
-          current: true,
         },
       ]}
       secondaryNavigation={[]}

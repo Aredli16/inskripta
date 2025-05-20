@@ -133,6 +133,7 @@ create or replace function get_user_by_email(search_email text)
                 email text
             )
     security definer
+    set search_path = ''
     language plpgsql
 as
 $$
@@ -203,7 +204,7 @@ create table students
     last_name       varchar(255),
     first_name      varchar(255),
     user_id         uuid references auth.users (id) on delete cascade default auth.uid(),
-    organization_id uuid references organizations (id) on delete cascade,
+    organization_id uuid not null references organizations (id) on delete cascade,
     created_at      timestamp                                         default now(),
     updated_at      timestamp                                         default now()
 );
@@ -284,7 +285,7 @@ create policy "All can see owned registrations and orga admins can see all"
 create policy "All can insert self registrations and orga admins can insert"
     on registrations
     for insert
-    with check (student_id = (select id
+    with check (student_id in (select id
                               from students
                               where user_id = auth.uid())
     or exists(select 1
