@@ -49,7 +49,7 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
   ];
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <>
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold text-gray-900">
@@ -73,7 +73,7 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

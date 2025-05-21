@@ -72,7 +72,8 @@
     "Admin": {
       "Navigation": {
         "Students": "Elèves",
-        "Registrations": "Inscriptions"
+        "Registrations": "Inscriptions",
+        "Settings": "Paramètres"
       },
       "Students": {
         "Title": "Elèves",
@@ -129,6 +130,23 @@
           "StudentInformationDescription": "Informations de l'élève pour l'inscription",
           "LastName": "Nom de famille",
           "FirstName": "Prénom"
+        }
+      },
+      "Settings": {
+        "Title": "Paramètres",
+        "Tabs": {
+          "Registration": "Inscriptions"
+        },
+        "Registration": {
+          "SchoolYears": {
+            "Title": "Années scolaires",
+            "New": {
+              "StartDate": "Date de début",
+              "EndDate": "Date de fin",
+              "Current": "Année scolaire actuelle",
+              "Save": "Sauvegarder"
+            }
+          }
         }
       }
     }
