@@ -293,10 +293,10 @@ create table lessons
 (
     id              uuid primary key default gen_random_uuid(),
     name            varchar(255)                                         not null,
-    level           integer                                              not null,
-    day_of_week     day_of_week                                          not null,
-    start_time      time                                                 not null,
-    end_time        time                                                 not null,
+    level           varchar(255)                                         not null,
+    day_of_week     day_of_week,
+    start_time      time,
+    end_time        time,
     organization_id uuid references organizations (id) on delete cascade not null,
     created_at      timestamp        default now(),
     updated_at      timestamp        default now()

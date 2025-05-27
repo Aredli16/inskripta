@@ -15,6 +15,8 @@ const ValidationInput = ({
   error,
   onChange,
   value,
+  required,
+  defaultValue,
 }: {
   children: ReactNode;
   name: string;
@@ -23,6 +25,8 @@ const ValidationInput = ({
   error?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string | readonly string[] | number;
+  required?: boolean;
+  defaultValue?: string | readonly string[] | number;
 }) => {
   return (
     <div>
@@ -37,7 +41,7 @@ const ValidationInput = ({
           id={name}
           name={name}
           type={type}
-          required
+          required={required}
           autoComplete={autoComplete}
           className={clsx(
             error
@@ -49,6 +53,7 @@ const ValidationInput = ({
           aria-describedby={error ? `${name}-error` : undefined}
           onChange={onChange}
           value={value}
+          defaultValue={defaultValue}
         />
         {error && (
           <ExclamationCircleIcon

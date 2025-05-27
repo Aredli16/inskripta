@@ -37,35 +37,35 @@ export type Database = {
       lessons: {
         Row: {
           created_at: string | null;
-          day_of_week: Database["public"]["Enums"]["day_of_week"];
-          end_time: string;
+          day_of_week: Database["public"]["Enums"]["day_of_week"] | null;
+          end_time: string | null;
           id: string;
-          level: number;
+          level: string;
           name: string;
           organization_id: string;
-          start_time: string;
+          start_time: string | null;
           updated_at: string | null;
         };
         Insert: {
           created_at?: string | null;
-          day_of_week: Database["public"]["Enums"]["day_of_week"];
-          end_time: string;
+          day_of_week?: Database["public"]["Enums"]["day_of_week"] | null;
+          end_time?: string | null;
           id?: string;
-          level: number;
+          level: string;
           name: string;
           organization_id: string;
-          start_time: string;
+          start_time?: string | null;
           updated_at?: string | null;
         };
         Update: {
           created_at?: string | null;
-          day_of_week?: Database["public"]["Enums"]["day_of_week"];
-          end_time?: string;
+          day_of_week?: Database["public"]["Enums"]["day_of_week"] | null;
+          end_time?: string | null;
           id?: string;
-          level?: number;
+          level?: string;
           name?: string;
           organization_id?: string;
-          start_time?: string;
+          start_time?: string | null;
           updated_at?: string | null;
         };
         Relationships: [
