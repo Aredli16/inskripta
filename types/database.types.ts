@@ -34,6 +34,50 @@ export type Database = {
   };
   public: {
     Tables: {
+      lessons: {
+        Row: {
+          created_at: string | null;
+          day_of_week: Database["public"]["Enums"]["day_of_week"];
+          end_time: string;
+          id: string;
+          level: number;
+          name: string;
+          organization_id: string;
+          start_time: string;
+          updated_at: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          day_of_week: Database["public"]["Enums"]["day_of_week"];
+          end_time: string;
+          id?: string;
+          level: number;
+          name: string;
+          organization_id: string;
+          start_time: string;
+          updated_at?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          day_of_week?: Database["public"]["Enums"]["day_of_week"];
+          end_time?: string;
+          id?: string;
+          level?: number;
+          name?: string;
+          organization_id?: string;
+          start_time?: string;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "lessons_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       organization_administration: {
         Row: {
           organization_id: string;
@@ -107,6 +151,36 @@ export type Database = {
             columns: ["student_id"];
             isOneToOne: false;
             referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      registrations_lessons: {
+        Row: {
+          lesson_id: string;
+          registration_id: string;
+        };
+        Insert: {
+          lesson_id: string;
+          registration_id: string;
+        };
+        Update: {
+          lesson_id?: string;
+          registration_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "registrations_lessons_lesson_id_fkey";
+            columns: ["lesson_id"];
+            isOneToOne: false;
+            referencedRelation: "lessons";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "registrations_lessons_registration_id_fkey";
+            columns: ["registration_id"];
+            isOneToOne: false;
+            referencedRelation: "registrations";
             referencedColumns: ["id"];
           },
         ];
@@ -213,6 +287,14 @@ export type Database = {
       };
     };
     Enums: {
+      day_of_week:
+        | "Monday"
+        | "Tuesday"
+        | "Wednesday"
+        | "Thursday"
+        | "Friday"
+        | "Saturday"
+        | "Sunday";
       user_role: "super_admin";
     };
     CompositeTypes: {
@@ -332,6 +414,15 @@ export const Constants = {
   },
   public: {
     Enums: {
+      day_of_week: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
       user_role: ["super_admin"],
     },
   },

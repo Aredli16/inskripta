@@ -278,6 +278,30 @@ create policy "All can delete self students and orga admins can delete"
               where organization_id = students.organization_id
                 and user_id = auth.uid()));
 
+
+create type day_of_week as enum (
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+    );
+
+create table lessons
+(
+    id              uuid primary key default gen_random_uuid(),
+    name            varchar(255)                                         not null,
+    level           integer                                              not null,
+    day_of_week     day_of_week                                          not null,
+    start_time      time                                                 not null,
+    end_time        time                                                 not null,
+    organization_id uuid references organizations (id) on delete cascade not null,
+    created_at      timestamp        default now(),
+    updated_at      timestamp        default now()
+);
+
 create table registrations
 (
     id             uuid primary key default gen_random_uuid(),
@@ -352,3 +376,10 @@ create policy "All can delete self registrations and orga admins can delete"
                                        from students
                                        where id = registrations.student_id)
                 and user_id = auth.uid()));
+
+create table registrations_lessons
+(
+    registration_id uuid references registrations (id) on delete cascade not null,
+    lesson_id       uuid references lessons (id) on delete cascade       not null,
+    primary key (registration_id, lesson_id)
+);
