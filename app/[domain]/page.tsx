@@ -13,8 +13,9 @@ import Image from "next/image";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { CheckCircleIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { getTranslations } from "next-intl/server";
+import LessonBadge from "@/components/LessonBadge";
 
 const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
   const { domain } = await params;
@@ -22,7 +23,7 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
   const supabase = await createClient();
   const { data: registrations } = await supabase
     .from("registrations")
-    .select("*, students!inner(*, organizations!inner(*))")
+    .select("*, students!inner(*, organizations!inner(*)), lessons(*)")
     .eq("students.organizations.name", domain);
 
   return (
@@ -157,81 +158,64 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
           </Menu>
         </div>
 
-        <div className="mt-16">
-          <h2 className="sr-only">{t("Registration.List.Title")}</h2>
-          <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
-            <div className="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
-              {registrations?.map((registration) => (
-                <div
-                  key={registration.id}
-                  className="border-t border-b border-gray-200 bg-white shadow-xs sm:rounded-lg sm:border"
-                >
-                  <h3 className="sr-only">
-                    {t("Registration.List.CreatedAt")}{" "}
-                    <time dateTime={registration.created_at ?? ""}>
-                      {registration.created_at}
-                    </time>
-                  </h3>
+        {registrations?.map((registration) => {
+          const steps = [
+            {
+              key: "pending",
+              name: "En attente de finalisation",
+            },
+            {
+              key: "waiting_for_review",
+              name: "En attente de validation",
+            },
+            {
+              key: "registered",
+              name: "Inscription terminée",
+            },
+          ];
 
-                  <div className="flex items-center border-b border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6">
-                    <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
-                      <div>
-                        <dt className="font-medium text-gray-900">
-                          {t("Registration.List.ID")}
-                        </dt>
-                        <dd className="mt-1 text-gray-500">
-                          {registration.id}
-                        </dd>
-                      </div>
-                      <div className="hidden sm:block">
-                        <dt className="font-medium text-gray-900">
-                          {t("Registration.List.CreatedAt")}
-                        </dt>
-                        <dd className="mt-1 text-gray-500">
-                          <time dateTime={registration.created_at ?? ""}>
-                            {new Date(
-                              registration.created_at ?? "",
-                            ).toLocaleString()}
-                          </time>
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
-
-                  <ul role="list" className="divide-y divide-gray-200">
-                    <li className="p-4 sm:p-6">
-                      <div className="flex items-center sm:items-start">
-                        <div className="flex-1 text-sm">
-                          <div className="font-medium text-gray-900 sm:flex sm:justify-between">
-                            <h5>
-                              {registration.students.last_name}{" "}
-                              {registration.students.first_name}
-                            </h5>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="mt-6 sm:flex sm:justify-between">
-                        <div className="flex items-center">
-                          <CheckCircleIcon
-                            aria-hidden="true"
-                            className="size-5 text-green-500"
-                          />
-                          <p className="ml-2 text-sm font-medium text-gray-500">
-                            Delivered on{" "}
-                            <time dateTime={registration.created_at ?? ""}>
-                              {registration.created_at}
-                            </time>
+          return (
+            <div key={registration.id} className="mt-6">
+              <div className="space-y-2 px-4 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 sm:px-0">
+                <div className="flex sm:items-baseline sm:space-x-4">
+                  <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                    Inscription #{registration.id}
+                  </h1>
+                </div>
+                <p className="text-sm text-gray-600">
+                  Inscription crée le{" "}
+                  <time
+                    dateTime={registration.created_at ?? ""}
+                    className="font-medium text-gray-900"
+                  >
+                    {new Date(registration.created_at ?? "").toLocaleString()}
+                  </time>
+                </p>
+              </div>
+              <div className="mt-6">
+                <div className="space-y-8">
+                  <div className="border-t border-b border-gray-200 bg-white shadow-xs sm:rounded-lg sm:border">
+                    <div className="px-4 py-6 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
+                      <div className="sm:flex lg:col-span-5">
+                        <div className="mt-6 sm:mt-0 sm:ml-6">
+                          <p className="mt-2 text-sm font-medium text-gray-900">
+                            {registration.students.last_name}{" "}
+                            {registration.students.first_name}
+                          </p>
+                          <p className="mt-3 text-sm text-gray-500">
+                            {registration.lessons.map((lesson) => (
+                              <LessonBadge key={lesson.id} lesson={lesson} />
+                            ))}
                           </p>
                         </div>
                       </div>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </main>
     </>
   );

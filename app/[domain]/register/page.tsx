@@ -53,21 +53,23 @@ const Page = async ({ params }: { params: Promise<{ domain: string }> }) => {
           throw schoolYearError;
         }
 
-        const { error: registrationError } = await supabase
+        const { data: registration, error: registrationError } = await supabase
           .from("registrations")
           .insert([
             {
               student_id: student.id,
               school_year_id: schoolYear.id,
             },
-          ]);
+          ])
+          .select()
+          .single();
 
         if (registrationError) {
           throw registrationError;
         }
 
         revalidatePath("/");
-        redirect("/");
+        redirect("/register/lessons?registration=" + registration.id);
       }}
     >
       <div className="space-y-12">
