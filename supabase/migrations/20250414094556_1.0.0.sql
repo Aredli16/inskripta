@@ -156,6 +156,29 @@ create table school_years
     updated_at      timestamp        default now()
 );
 
+create or replace function handle_unique_current_school_year()
+    returns trigger as
+$$
+begin
+    if NEW.current = true then
+        update school_years
+        set current = false
+        where organization_id = NEW.organization_id
+          and id != NEW.id;
+    end if;
+
+    NEW.updated_at = now();
+
+    return NEW;
+end;
+$$ language plpgsql;
+
+create trigger trg_set_unique_current_school_year
+    before insert or update
+    on school_years
+    for each row
+execute function handle_unique_current_school_year();
+
 alter table school_years
     enable row level security;
 

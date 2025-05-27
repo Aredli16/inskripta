@@ -1,7 +1,7 @@
 "use client";
 
 import BaseAdminLayout from "@/components/layout/BaseAdminLayout";
-import { FolderIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { CogIcon, FolderIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
@@ -22,7 +22,13 @@ const DomainAdminLayout = ({ children }: { children: ReactNode }) => {
           href: "/admin/registrations",
         },
       ]}
-      secondaryNavigation={[]}
+      secondaryNavigation={[
+        {
+          name: t("Settings"),
+          icon: CogIcon,
+          href: "/admin/settings",
+        },
+      ]}
     >
       {children}
     </BaseAdminLayout>
